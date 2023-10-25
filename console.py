@@ -74,7 +74,11 @@ class HBNBCommand(cmd.Cmd):
                 pline = pline[2].strip()  # pline is now str
                 if pline:
                     # check for *args or **kwargs
+<<<<<<< HEAD
                     if pline[0] == '{' and pline[-1] == '}'\
+=======
+                    if pline[0] is '{' and pline[-1] is '}'\
+>>>>>>> 33c2264bfd947318393d3351233049063ba83265
                             and type(eval(pline)) is dict:
                         _args = pline
                     else:
@@ -114,6 +118,7 @@ class HBNBCommand(cmd.Cmd):
         """ Overrides the emptyline method of CMD """
         pass
 
+<<<<<<< HEAD
     def do_create(self, arg):
         """ Create an object of any class"""
         current_time = datetime.now()
@@ -163,6 +168,41 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the create method """
         print("Creates a class of any type")
         print("[Usage]: create <className>\n")
+=======
+    def do_create(self, line):
+        """Usage: create <class> <key 1>=<value 2> <key 2>=<value 2> ...
+        Create a new class instance with given keys/values and print its id.
+        """
+        try:
+            if not line:
+                raise SyntaxError()
+            my_list = line.split(" ")
+
+            kwargs = {}
+            for i in range(1, len(my_list)):
+                key, value = tuple(my_list[i].split("="))
+                if value[0] == '"':
+                    value = value.strip('"').replace("_", " ")
+                else:
+                    try:
+                        value = eval(value)
+                    except (SyntaxError, NameError):
+                        continue
+                kwargs[key] = value
+
+            if kwargs == {}:
+                obj = eval(my_list[0])()
+            else:
+                obj = eval(my_list[0])(**kwargs)
+                storage.new(obj)
+            print(obj.id)
+            obj.save()
+
+        except SyntaxError:
+            print("** class name missing **")
+        except NameError:
+            print("** class doesn't exist **")
+>>>>>>> 33c2264bfd947318393d3351233049063ba83265
 
     def do_show(self, args):
         """ Method to show an individual object """
