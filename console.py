@@ -226,7 +226,7 @@ class HBNBCommand(cmd.Cmd):
             returns a string of arguments
         """
         new_list = []
-        new_list.append(args[0]
+        new_list.append(args[0])
         try:
             my_dict = eval(
                 args[1][args[1].find('{'):args[1].find('}') + 1])
