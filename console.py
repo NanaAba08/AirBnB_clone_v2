@@ -238,7 +238,7 @@ class HBNBCommand(cmd.Cmd):
             new_list.append(my_dict)
             return new_list
         new_str = args[1][args[1].find('(') + 1:args[1].find(')')]
-        new_list.append(" ".join(new_str.split(", "))
+        new_list.append(" ".join(new_str.split(", ")))
         return " ".join(i for i in new_list)
 
     def default(self, line):
